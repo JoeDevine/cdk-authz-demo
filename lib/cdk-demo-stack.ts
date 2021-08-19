@@ -3,6 +3,7 @@ import * as cdk from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as iam from '@aws-cdk/aws-iam';
 import * as apigw from '@aws-cdk/aws-apigateway';
+import { HitCounter } from './hitcounter';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -29,8 +30,12 @@ export class CdkDemoStack extends cdk.Stack {
       role: lambdaRole,
     });
 
+    const helloWithCounter = new HitCounter(this, 'HelloHitCounter', {
+      downstream: hello,
+    });
+
     new apigw.LambdaRestApi(this, 'Endpoint', {
-      handler: hello,
+      handler: helloWithCounter.handler,
       cloudWatchRole: false,
     });
   }
