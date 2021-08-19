@@ -6,3 +6,12 @@ node_modules
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+Dockerfile
+
+get-aws-token.sh
+
+kafka
+
+kafka_2.12-2.2.1
+kafka_2.12-2.2.1.tgz
