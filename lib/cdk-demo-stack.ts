@@ -1,13 +1,8 @@
 import * as cdk from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
-import * as iam from '@aws-cdk/aws-iam';
 import * as apigw from '@aws-cdk/aws-apigateway';
 import { HitCounter } from './hitcounter';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-
-const { BASE_NAME, LAMBDA_ROLE_NAME = '', LAMBDA_ROLE_ARN = '' } = process.env;
+import { TableViewer } from 'cdk-dynamo-table-viewer';
 export class CdkDemoStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -24,6 +19,10 @@ export class CdkDemoStack extends cdk.Stack {
 
     new apigw.LambdaRestApi(this, 'Endpoint', {
       handler: helloWithCounter.handler,
+    });
+    new TableViewer(this, 'ViewHitCounter', {
+      title: 'Hello Hits',
+      table: helloWithCounter.table,
     });
   }
 }

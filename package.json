@@ -33,6 +33,7 @@
     "@aws-cdk/aws-sqs": "^1.119.0",
     "@aws-cdk/core": "1.118.0",
     "aws-sdk": "^2.971.0",
+    "cdk-dynamo-table-viewer": "^0.1.87",
     "dotenv": "^10.0.0",
     "source-map-support": "^0.5.16"
   }
